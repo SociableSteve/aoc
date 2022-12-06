@@ -14,11 +14,7 @@ for (let i = 0; i < bucket_count; i++) {
 while ((line = lines.shift()) !== "") {
   let bucket = 0;
   for (i = 0; i < line.length; i += 4) {
-    const entry = line
-      .substring(i, i + 3)
-      .trim()
-      .replace("[", "")
-      .replace("]", "");
+    const entry = line.substring(i + 1, i + 2).trim();
     if (entry.length) {
       buckets[bucket].unshift(entry);
       buckets2[bucket].unshift(entry);
