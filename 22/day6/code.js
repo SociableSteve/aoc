@@ -8,13 +8,11 @@ let first_part_answer = 0;
 let second_part_answer = 0;
 
 for (i = 0; i < chars.length; i++) {
-  if (!first_part_answer) {
-    if (new Set(chars.slice(i - packet_width, i)).size === packet_width) {
-      first_part_answer = i;
-    }
+  if (!first_part_answer && check_uniqueness(i, packet_width)) {
+    first_part_answer = i;
   }
 
-  if (new Set(chars.slice(i - message_width, i)).size === message_width) {
+  if (check_uniqueness(i, message_width)) {
     second_part_answer = i;
     break;
   }
@@ -22,3 +20,8 @@ for (i = 0; i < chars.length; i++) {
 
 console.log("First part:", first_part_answer);
 console.log("Second part:", second_part_answer);
+
+function check_uniqueness(offset, width) {
+  const char_slice = chars.slice(Math.max(offset - width, 0), offset);
+  return new Set(char_slice).size === width;
+}
